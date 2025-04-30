@@ -1,0 +1,165 @@
+import React, { useState } from "react";
+import { StepProps } from "../types";
+import AiAvatar from "./AiAvatar";
+import Button from "./Button";
+import { User, Mail, Phone, ArrowRight } from "lucide-react";
+
+interface FormErrors {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+}
+
+const Step1Form: React.FC<StepProps> = ({
+  userData,
+  setUserData,
+  onNext,
+  allFormData,
+}) => {
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const validateForm = () => {
+    const newErrors: FormErrors = {};
+
+    if (!userData.fullName.trim()) {
+      newErrors.fullName = "Name is required";
+    }
+
+    if (!userData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(userData.email)) {
+      newErrors.email = "Email is invalid";
+    }
+
+    if (!userData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      const data = {
+        fullName: userData.fullName,
+        email: userData.email,
+        phone: userData.phone,
+      };
+      allFormData(data);
+      onNext();
+    }
+  };
+
+  return (
+    <div className="max-w-xl mx-auto">
+      <AiAvatar
+        start={true}
+        stop={false}
+        agent_code={250}
+        quick_campaign_id="quickcamp5d5e9a69"
+      />
+
+      <div className="bg-white rounded-2xl p-6 shadow-md mb-6 relative">
+        {/* Message pointer */}
+        <div className="absolute w-5 h-5 bg-white border-l border-t border-gray-50 -top-2.5 left-1/2 -translate-x-1/2 rotate-45"></div>
+
+        <p className="text-lg text-gray-800 leading-relaxed">
+          Hi there! I'm the Ravan.ai assistant. I'd love to learn more about
+          your business needs. Could you share your information so I can
+          demonstrate how our AI technology can help you capture more leads and
+          book more appointments?
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Your Full Name"
+            className={`w-full p-4 pl-12 bg-white border ${
+              errors.fullName ? "border-red-500" : "border-gray-200"
+            } 
+              rounded-xl shadow-sm focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 
+              transition-all duration-300 placeholder:text-gray-400 placeholder:transition-all 
+              focus:placeholder:translate-x-1 focus:placeholder:opacity-70 text-gray-800`}
+            value={userData.fullName}
+            onChange={(e) =>
+              setUserData({ ...userData, fullName: e.target.value })
+            }
+          />
+          <User
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 
+            peer-focus:text-primary transition-colors"
+            size={20}
+          />
+          {errors.fullName && (
+            <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+          )}
+        </div>
+
+        <div className="relative">
+          <input
+            type="email"
+            placeholder="Your Email Address"
+            className={`w-full p-4 pl-12 bg-white border ${
+              errors.email ? "border-red-500" : "border-gray-200"
+            } 
+              rounded-xl shadow-sm focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 
+              transition-all duration-300 placeholder:text-gray-400 placeholder:transition-all 
+              focus:placeholder:translate-x-1 focus:placeholder:opacity-70 text-gray-800`}
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
+          />
+          <Mail
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 
+            peer-focus:text-primary transition-colors"
+            size={20}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        <div className="relative">
+          <input
+            type="tel"
+            placeholder="Your Phone Number"
+            className={`w-full p-4 pl-12 bg-white border ${
+              errors.phone ? "border-red-500" : "border-gray-200"
+            } 
+              rounded-xl shadow-sm focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 
+              transition-all duration-300 placeholder:text-gray-400 placeholder:transition-all 
+              focus:placeholder:translate-x-1 focus:placeholder:opacity-70 text-gray-800`}
+            value={userData.phone}
+            onChange={(e) =>
+              setUserData({ ...userData, phone: e.target.value })
+            }
+          />
+          <Phone
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 
+            peer-focus:text-primary transition-colors"
+            size={20}
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+          )}
+        </div>
+
+        <Button
+          type="submit"
+          icon={<ArrowRight size={18} />}
+          className="w-full mt-6"
+        >
+          Continue to Select Business Type
+        </Button>
+      </form>
+    </div>
+  );
+};
+
+export default Step1Form;
