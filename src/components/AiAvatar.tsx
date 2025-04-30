@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { RetellWebClient } from "retell-client-js-sdk";
 import axios from "axios";
 
@@ -10,37 +10,43 @@ const AiAvatar: React.FC<{
 }> = ({ start, stop, agent_code, quick_campaign_id }) => {
   const retellWebClient = new RetellWebClient();
   const [transcripts, setTranscripts] = useState([]);
+  const onestart = useRef(false);
 
   useEffect(() => {
     if (!agent_code || !quick_campaign_id) {
       return;
     }
-    const startagent = async () => {
-      try {
-        const res = await axios.post(
-          "https://test.closerx.ai/api/ravan-ai-start/",
-          {
-            schema_name: "manant123",
-            agent_code: agent_code,
-            quick_campaign_id: quick_campaign_id,
-            phone: 99911293960,
-            name: "Ravan",
-            email: "ravan@gmail.com",
-            country: "India",
-          }
-        );
 
-        const accessToken = res.data.response.access_token;
-        const newCallId = res.data.response.call_id;
+    if (onestart.current) {
+      onestart.current = false;
+      const startagent = async () => {
+        try {
+          const res = await axios.post(
+            "https://test.closerx.ai/api/ravan-ai-start/",
+            {
+              schema_name: "manant123",
+              agent_code: agent_code,
+              quick_campaign_id: quick_campaign_id,
+              phone: 99911293960,
+              name: "Ravan",
+              email: "ravan@gmail.com",
+              country: "India",
+            }
+          );
 
-        retellWebClient.startCall({
-          accessToken: accessToken,
-        });
-      } catch (err) {
-        console.error("Form error:", err);
-      }
-    };
-    startagent();
+          const accessToken = res.data.response.access_token;
+          const newCallId = res.data.response.call_id;
+
+          retellWebClient.startCall({
+            accessToken: accessToken,
+          });
+        } catch (err) {
+          console.error("Form error:", err);
+        }
+      };
+
+      startagent();
+    }
   }, [agent_code, quick_campaign_id]);
 
   const stopagent = () => {
