@@ -28,11 +28,11 @@ class ReactWidget extends HTMLElement {
 
     this.root = ReactDOM.createRoot(container);
     this.root.render(
-      <React.StrictMode>
-        <WidgetProvider agent_id={agent_id} schema={schema} type={type}>
-          <App />
-        </WidgetProvider>
-      </React.StrictMode>
+      // <React.StrictMode>
+      <WidgetProvider agent_id={agent_id} schema={schema} type={type}>
+        <App />
+      </WidgetProvider>
+      // </React.StrictMode>
     );
   }
 
