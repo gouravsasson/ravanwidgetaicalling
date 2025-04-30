@@ -88,7 +88,8 @@ const Step2CategorySelection: React.FC<StepProps> = ({
         `https://app.closerx.ai/api/testcall/voizerfreeaccount/`,
         {
           ...allFormData,
-          selectedAgent: selectedagent,
+          new_agent: selectedagent,
+          calling_number: "+18582520325",
         }
       );
       console.log("Form submitted:", allFormData);
@@ -105,8 +106,8 @@ const Step2CategorySelection: React.FC<StepProps> = ({
       <AiAvatar
         start={true}
         stop={false}
-        agent_code={252}
-        quick_campaign_id="quickcamp5d5e9a69"
+        agent_code={174}
+        quick_campaign_id="quickcamp581dd7a0"
       />
 
       <div className="bg-white rounded-2xl p-6 shadow-md mb-6 relative">

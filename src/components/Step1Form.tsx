@@ -44,9 +44,10 @@ const Step1Form: React.FC<StepProps> = ({
 
     if (validateForm()) {
       const data = {
-        fullName: userData.fullName,
         email: userData.email,
-        phone: userData.phone,
+        access_key: "testmycall",
+        receiver_number: userData.phone,
+        name: userData.fullName,
       };
       allFormData(data);
       onNext();
@@ -58,8 +59,8 @@ const Step1Form: React.FC<StepProps> = ({
       <AiAvatar
         start={true}
         stop={false}
-        agent_code={250}
-        quick_campaign_id="quickcamp5d5e9a69"
+        agent_code={173}
+        quick_campaign_id="quickcamp257c78ec"
       />
 
       <div className="bg-white rounded-2xl p-6 shadow-md mb-6 relative">

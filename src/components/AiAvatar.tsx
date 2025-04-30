@@ -17,36 +17,36 @@ const AiAvatar: React.FC<{
       return;
     }
 
-    if (onestart.current) {
-      onestart.current = false;
-      const startagent = async () => {
-        try {
-          const res = await axios.post(
-            "https://test.closerx.ai/api/ravan-ai-start/",
-            {
-              schema_name: "manant123",
-              agent_code: agent_code,
-              quick_campaign_id: quick_campaign_id,
-              phone: 99911293960,
-              name: "Ravan",
-              email: "ravan@gmail.com",
-              country: "India",
-            }
-          );
+    // if (onestart.current) {
+    //   onestart.current = false;
+    const startagent = async () => {
+      try {
+        const res = await axios.post(
+          "https://test.closerx.ai/api/ravan-ai-start/",
+          {
+            schema_name: "manant123",
+            agent_code: agent_code,
+            quick_campaign_id: quick_campaign_id,
+            phone: 99911293960,
+            name: "Ravan",
+            email: "ravan@gmail.com",
+            country: "India",
+          }
+        );
 
-          const accessToken = res.data.response.access_token;
-          const newCallId = res.data.response.call_id;
+        const accessToken = res.data.response.access_token;
+        const newCallId = res.data.response.call_id;
 
-          retellWebClient.startCall({
-            accessToken: accessToken,
-          });
-        } catch (err) {
-          console.error("Form error:", err);
-        }
-      };
+        retellWebClient.startCall({
+          accessToken: accessToken,
+        });
+      } catch (err) {
+        console.error("Form error:", err);
+      }
+    };
 
-      startagent();
-    }
+    startagent();
+    // }
   }, [agent_code, quick_campaign_id]);
 
   const stopagent = () => {
