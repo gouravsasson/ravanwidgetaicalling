@@ -22,7 +22,7 @@ const AiAvatar: React.FC<{
     const startagent = async () => {
       try {
         const res = await axios.post(
-          "https://test.closerx.ai/api/ravan-ai-start/",
+          "https://app.closerx.ai/api/ravan-ai-start/",
           {
             schema_name: "voizerfreeaccount",
             agent_code: agent_code,
