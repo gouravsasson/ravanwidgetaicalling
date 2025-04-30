@@ -24,7 +24,7 @@ const AiAvatar: React.FC<{
         const res = await axios.post(
           "https://test.closerx.ai/api/ravan-ai-start/",
           {
-            schema_name: "manant123",
+            schema_name: "voizerfreeaccount",
             agent_code: agent_code,
             quick_campaign_id: quick_campaign_id,
             phone: 99911293960,
