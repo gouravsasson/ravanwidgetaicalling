@@ -23,6 +23,10 @@ const AiAvatar: React.FC<{
             schema_name: "manant123",
             agent_code: agent_code,
             quick_campaign_id: quick_campaign_id,
+            phone: 99911293960,
+            name: "Ravan",
+            email: "ravan@gmail.com",
+            country: "India",
           }
         );
 
