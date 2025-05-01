@@ -52,7 +52,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
 }) => {
   console.log(userData);
   const [wheelRotation, setWheelRotation] = useState(0);
-  const [selectedagent, setSelectedagent] = useState(0);
+  const [selectedagent, setSelectedagent] = useState(164);
   console.log(selectedagent);
   const wheelRef = useRef<HTMLDivElement>(null);
 
