@@ -3,6 +3,7 @@ import { StepProps } from "../types";
 import AiAvatar from "./AiAvatar";
 import Button from "./Button";
 import { ArrowRight, ChevronUp, ChevronDown } from "lucide-react";
+import { useRetellStore } from "../utils/useRetellStore";
 import axios from "axios";
 
 // Business categories
@@ -78,11 +79,17 @@ const Step2CategorySelection: React.FC<StepProps> = ({
       newIndex = (userData.selectedCategory + 1) % totalCategories;
     }
 
-    handleCategorySelect(newIndex);
+    handleCategorySelect(newIndex, categories[newIndex].agent_code);
+  };
+
+  const handleStop = () => {
+    const state = useRetellStore.getState() as { stopAgent: () => void };
+    state.stopAgent();
   };
 
   const handleNext = async () => {
     try {
+      handleStop();
       const response = await axios.post(
         `https://app.closerx.ai/api/testcall/voizerfreeaccount/`,
         {
@@ -97,7 +104,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
       console.log("Form submitted:", allFormData);
       // alert("Request sent! We will contact you shortly.");
     } catch (error) {
-      alert("An error occurred. Please try again later.");
+      // alert("An error occurred. Please try again later.");
     }
     onNext();
   };

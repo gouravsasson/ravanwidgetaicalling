@@ -14,9 +14,9 @@ const Step3CallDemo: React.FC<StepProps> = ({ userData, setUserData, onNext }) =
   const transcriptRef = useRef<HTMLDivElement>(null);
 
   // Start call simulation when component mounts
-  useEffect(() => {
-    startCallSimulation();
-  }, []);
+  // useEffect(() => {
+  //   startCallSimulation();
+  // }, []);
 
   // Auto-scroll transcript to bottom when new messages are added
   useEffect(() => {
@@ -25,52 +25,52 @@ const Step3CallDemo: React.FC<StepProps> = ({ userData, setUserData, onNext }) =
     }
   }, [transcript]);
 
-  const startCallSimulation = () => {
-    // Get user info with fallbacks
-    const name = userData.fullName.trim() || 'there';
-    const category = categories[userData.selectedCategory] || 'business';
+  // const startCallSimulation = () => {
+  //   // Get user info with fallbacks
+  //   const name = userData.fullName.trim() || 'there';
+  //   const category = categories[userData.selectedCategory] || 'business';
     
-    // Define conversation
-    const conversation: Message[] = [
-      { 
-        speaker: 'AI', 
-        text: `Hello ${name}, this is Ravan.ai calling. I noticed you were just looking at ${category} solutions on our website. Is this a good time to talk about how we can help grow your business?` 
-      },
-      { 
-        speaker: 'Prospect', 
-        text: '...' 
-      },
-      { 
-        speaker: 'AI', 
-        text: `Great! Based on your interests in ${category}, our system can help you capture leads 24/7 and automatically book qualified appointments for your team.` 
-      },
-      { 
-        speaker: 'Prospect', 
-        text: '...' 
-      },
-      { 
-        speaker: 'AI', 
-        text: `We've helped similar ${category} businesses increase their appointment bookings by over 300%. Would you be interested in seeing how it works specifically for your company?` 
-      }
-    ];
+  //   // Define conversation
+  //   // const conversation: Message[] = [
+  //   //   { 
+  //   //     speaker: 'AI', 
+  //   //     text: `Hello ${name}, this is Ravan.ai calling. I noticed you were just looking at ${category} solutions on our website. Is this a good time to talk about how we can help grow your business?` 
+  //   //   },
+  //   //   { 
+  //   //     speaker: 'Prospect', 
+  //   //     text: '...' 
+  //   //   },
+  //   //   { 
+  //   //     speaker: 'AI', 
+  //   //     text: `Great! Based on your interests in ${category}, our system can help you capture leads 24/7 and automatically book qualified appointments for your team.` 
+  //   //   },
+  //   //   { 
+  //   //     speaker: 'Prospect', 
+  //   //     text: '...' 
+  //   //   },
+  //   //   { 
+  //   //     speaker: 'AI', 
+  //   //     text: `We've helped similar ${category} businesses increase their appointment bookings by over 300%. Would you be interested in seeing how it works specifically for your company?` 
+  //   //   }
+  //   // ];
     
-    // Clear existing transcript
-    setTranscript([]);
+  //   // Clear existing transcript
+  //   setTranscript([]);
     
-    // Add first message immediately
-    setTranscript([conversation[0]]);
+  //   // Add first message immediately
+  //   setTranscript([conversation[0]]);
     
-    // Add remaining messages with delay
-    let messageIndex = 1;
-    const messageInterval = setInterval(() => {
-      if (messageIndex < conversation.length) {
-        setTranscript(prev => [...prev, conversation[messageIndex]]);
-        messageIndex++;
-      } else {
-        clearInterval(messageInterval);
-      }
-    }, 2000);
-  };
+  //   // Add remaining messages with delay
+  //   let messageIndex = 1;
+  //   const messageInterval = setInterval(() => {
+  //     if (messageIndex < conversation.length) {
+  //       setTranscript(prev => [...prev, conversation[messageIndex]]);
+  //       messageIndex++;
+  //     } else {
+  //       clearInterval(messageInterval);
+  //     }
+  //   }, 2000);
+  // };
 
   // Business categories (same as in Step2)
   const categories = [
