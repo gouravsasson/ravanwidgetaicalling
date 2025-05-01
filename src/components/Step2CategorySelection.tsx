@@ -5,6 +5,7 @@ import Button from "./Button";
 import { ArrowRight, ChevronUp, ChevronDown } from "lucide-react";
 import { useRetellStore } from "../utils/useRetellStore";
 import axios from "axios";
+import { useTranscriptStore } from "../utils/useTranscriptStore";
 
 // Business categories
 const categories = [
@@ -54,6 +55,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
   console.log(userData);
   const [wheelRotation, setWheelRotation] = useState(0);
   const [selectedagent, setSelectedagent] = useState(164);
+  const transcripts = useTranscriptStore((state) => state.transcripts);
   console.log(selectedagent);
   const wheelRef = useRef<HTMLDivElement>(null);
 
@@ -122,11 +124,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
         {/* Message pointer */}
         <div className="absolute w-5 h-5 bg-white border-l border-t border-gray-50 -top-2.5 left-1/2 -translate-x-1/2 rotate-45"></div>
 
-        <p className="text-lg text-gray-800 leading-relaxed">
-          {userData.fullName ? `Great, ${userData.fullName}!` : "Great!"} Now,
-          please select your business category so we can tailor our AI demo to
-          your specific needs:
-        </p>
+        <p className="text-lg text-gray-800 leading-relaxed">{transcripts}</p>
       </div>
 
       {/* 3D Wheel Container */}

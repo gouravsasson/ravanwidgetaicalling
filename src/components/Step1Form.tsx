@@ -4,6 +4,7 @@ import AiAvatar from "./AiAvatar";
 import Button from "./Button";
 import { User, Mail, Phone, ArrowRight } from "lucide-react";
 import { useRetellStore } from "../utils/useRetellStore";
+import { useTranscriptStore } from "../utils/useTranscriptStore";
 
 interface FormErrors {
   fullName?: string;
@@ -13,6 +14,7 @@ interface FormErrors {
 
 const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
   const [errors, setErrors] = useState<FormErrors>({});
+  const transcripts = useTranscriptStore((state) => state.transcripts);
 
   const validateForm = () => {
     const newErrors: FormErrors = {};
@@ -68,12 +70,7 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
         {/* Message pointer */}
         <div className="absolute w-5 h-5 bg-white border-l border-t border-gray-50 -top-2.5 left-1/2 -translate-x-1/2 rotate-45"></div>
 
-        <p className="text-lg text-gray-800 leading-relaxed">
-          Hi there! I'm the Ravan.ai assistant. I'd love to learn more about
-          your business needs. Could you share your information so I can
-          demonstrate how our AI technology can help you capture more leads and
-          book more appointments?
-        </p>
+        <p className="text-lg text-gray-800 leading-relaxed">{transcripts}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">

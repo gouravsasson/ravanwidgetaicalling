@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { RetellWebClient } from "retell-client-js-sdk";
 import axios from "axios";
 import { useRetellStore } from "../utils/useRetellStore";
+import { useTranscriptStore } from "../utils/useTranscriptStore";
 
 const AiAvatar: React.FC<{
   start: boolean;
@@ -10,7 +11,9 @@ const AiAvatar: React.FC<{
   quick_campaign_id: string;
 }> = ({ start, stop, agent_code, quick_campaign_id }) => {
   const retellWebClient = new RetellWebClient();
-  const [transcripts, setTranscripts] = useState([]);
+  const transcripts = useTranscriptStore((state) => state.transcripts);
+  const setTranscripts = useTranscriptStore((state) => state.setTranscripts);
+  console.log(transcripts);
   const onestart = useRef(false);
 
   useEffect(() => {
@@ -57,9 +60,19 @@ const AiAvatar: React.FC<{
     // }
   }, [agent_code, quick_campaign_id]);
 
+  retellWebClient.on("update", (update) => {
+    const alltrans = update.transcript;
+    let Trans = "";
 
+    for (let index = 0; index < alltrans.length; index++) {
+      const currentTranscript = alltrans[index];
+      Trans = currentTranscript.content;
 
-  
+      if (currentTranscript) {
+        setTranscripts(Trans); // Update state with the latest transcript
+      }
+    }
+  });
 
   const stopagent = () => {
     retellWebClient.stopCall();
