@@ -16,9 +16,9 @@ const AiAvatar: React.FC<{
     if (!agent_code || !quick_campaign_id) {
       return;
     }
-
-    // if (onestart.current) {
-    //   onestart.current = false;
+    if (agent_code === 174) {
+      retellWebClient.stopCall();
+    }
     const startagent = async () => {
       try {
         const res = await axios.post(
