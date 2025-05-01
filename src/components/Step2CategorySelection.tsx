@@ -49,13 +49,12 @@ const Step2CategorySelection: React.FC<StepProps> = ({
   userData,
   setUserData,
   onNext,
-  allFormData,
 }) => {
+  console.log(userData);
   const [wheelRotation, setWheelRotation] = useState(0);
   const [selectedagent, setSelectedagent] = useState(0);
   console.log(selectedagent);
   const wheelRef = useRef<HTMLDivElement>(null);
-  console.log(allFormData);
 
   // Update wheel rotation when selected category changes
   useEffect(() => {
@@ -87,7 +86,9 @@ const Step2CategorySelection: React.FC<StepProps> = ({
       const response = await axios.post(
         `https://app.closerx.ai/api/testcall/voizerfreeaccount/`,
         {
-          ...allFormData,
+          email: userData.email,
+          receiver_number: userData.phone,
+          name: userData.fullName,
           new_agent: selectedagent,
           access_key: "testmycall",
           calling_number: "+18582520325",

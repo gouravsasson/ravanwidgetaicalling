@@ -75,7 +75,6 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
           userData={userData}
           setUserData={setUserData}
           onNext={goToNextStep}
-          allFormData={formData}
         />
       ),
       icon: currentStep > 1 ? <CheckIcon size={16} /> : "2",
