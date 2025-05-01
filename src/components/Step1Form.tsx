@@ -5,6 +5,8 @@ import Button from "./Button";
 import { User, Mail, Phone, ArrowRight } from "lucide-react";
 import { useRetellStore } from "../utils/useRetellStore";
 import { useTranscriptStore } from "../utils/useTranscriptStore";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 interface FormErrors {
   fullName?: string;
@@ -125,24 +127,20 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
         </div>
 
         <div className="relative">
-          <input
-            type="tel"
-            placeholder="Your Phone Number"
-            className={`w-full p-4 pl-12 bg-white border ${
-              errors.phone ? "border-red-500" : "border-gray-200"
-            } 
-              rounded-xl shadow-sm focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 
-              transition-all duration-300 placeholder:text-gray-400 placeholder:transition-all 
-              focus:placeholder:translate-x-1 focus:placeholder:opacity-70 text-gray-800`}
+          <PhoneInput
+            containerClass="w-full h-[58px]"
+            inputClass=" !h-[58px] !w-[576px] !rounded-xl"
+            dropdownClass="bottom-10 z-50"
+            dropdownStyle={{ zIndex: 1000 }}
+            inputProps={{
+              name: "phone",
+              required: true,
+            }}
             value={userData.phone}
-            onChange={(e) =>
-              setUserData({ ...userData, phone: e.target.value })
-            }
-          />
-          <Phone
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 
-            peer-focus:text-primary transition-colors"
-            size={20}
+            onChange={(phone) => {
+              setUserData({ ...userData, phone });
+            }}
+            enableSearch={true}
           />
           {errors.phone && (
             <p className="text-red-500 text-sm mt-1">{errors.phone}</p>

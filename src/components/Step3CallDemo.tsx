@@ -3,6 +3,7 @@ import { StepProps } from "../types";
 import Button from "./Button";
 import { ArrowRight, Phone } from "lucide-react";
 
+
 // Define conversation structure
 interface Message {
   speaker: string;
