@@ -3,6 +3,7 @@ import { StepProps } from "../types";
 import AiAvatar from "./AiAvatar";
 import Button from "./Button";
 import { User, Mail, Phone, ArrowRight } from "lucide-react";
+import { useRetellStore } from "../utils/useRetellStore";
 
 interface FormErrors {
   fullName?: string;
@@ -10,11 +11,7 @@ interface FormErrors {
   phone?: string;
 }
 
-const Step1Form: React.FC<StepProps> = ({
-  userData,
-  setUserData,
-  onNext,
-}) => {
+const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
   const [errors, setErrors] = useState<FormErrors>({});
 
   const validateForm = () => {
@@ -42,6 +39,7 @@ const Step1Form: React.FC<StepProps> = ({
     e.preventDefault();
 
     if (validateForm()) {
+      handleStop();
       const data = {
         email: userData.email,
         receiver_number: userData.phone,
@@ -50,6 +48,11 @@ const Step1Form: React.FC<StepProps> = ({
       // allFormData(data);
       onNext();
     }
+  };
+
+  const handleStop = () => {
+    const state = useRetellStore.getState() as { stopAgent: () => void };
+    state.stopAgent();
   };
 
   return (

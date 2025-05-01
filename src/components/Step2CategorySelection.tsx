@@ -95,9 +95,8 @@ const Step2CategorySelection: React.FC<StepProps> = ({
         }
       );
       console.log("Form submitted:", allFormData);
-      alert("Request sent! We will contact you shortly.");
+      // alert("Request sent! We will contact you shortly.");
     } catch (error) {
-      console.error("Error submitting form:", error);
       alert("An error occurred. Please try again later.");
     }
     onNext();

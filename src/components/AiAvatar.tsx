@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RetellWebClient } from "retell-client-js-sdk";
 import axios from "axios";
+import { useRetellStore } from "../utils/useRetellStore";
 
 const AiAvatar: React.FC<{
   start: boolean;
@@ -11,6 +12,13 @@ const AiAvatar: React.FC<{
   const retellWebClient = new RetellWebClient();
   const [transcripts, setTranscripts] = useState([]);
   const onestart = useRef(false);
+
+  useEffect(() => {
+    const state = useRetellStore.getState() as {
+      setRetellWebClient: (client: RetellWebClient) => void;
+    };
+    state.setRetellWebClient(retellWebClient);
+  }, []);
 
   useEffect(() => {
     if (!agent_code || !quick_campaign_id) {

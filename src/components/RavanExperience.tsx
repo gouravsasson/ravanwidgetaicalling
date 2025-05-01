@@ -67,7 +67,7 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
         <Step3CallDemo
           userData={userData}
           setUserData={setUserData}
-          onNext={goToNextStep}
+          onNext={resetDemo}
         />
       ),
       icon: currentStep > 2 ? <CheckIcon size={16} /> : "3",
