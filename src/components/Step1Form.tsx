@@ -137,7 +137,7 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
               name: "phone",
               required: true,
             }}
-            country={"us"}
+            // country={"us"}
             value={userData.phone}
             onChange={(phone) => {
               setUserData({ ...userData, phone });
