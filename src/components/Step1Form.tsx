@@ -143,6 +143,7 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
               setUserData({ ...userData, phone });
             }}
             enableSearch={true}
+            enableClickOutside={false}
           />
           {errors.phone && (
             <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
