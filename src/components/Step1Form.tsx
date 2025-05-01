@@ -14,7 +14,6 @@ const Step1Form: React.FC<StepProps> = ({
   userData,
   setUserData,
   onNext,
-  allFormData,
 }) => {
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -48,7 +47,7 @@ const Step1Form: React.FC<StepProps> = ({
         receiver_number: userData.phone,
         name: userData.fullName,
       };
-      allFormData(data);
+      // allFormData(data);
       onNext();
     }
   };

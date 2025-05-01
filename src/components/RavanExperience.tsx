@@ -22,24 +22,8 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
   setUserData,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    selectedCategory: 0,
-  });
-
   const goToNextStep = () => {
     setCurrentStep((prev) => Math.min(prev + 1, 3));
-  };
-
-  const allFormData = (data) => {
-    setFormData({
-      fullName: data.fullName,
-      email: data.email,
-      phone: data.phone,
-      selectedCategory: data.selectedCategory,
-    });
   };
 
   const goToPreviousStep = () => {
@@ -64,7 +48,6 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
           userData={userData}
           setUserData={setUserData}
           onNext={goToNextStep}
-          allFormData={allFormData}
         />
       ),
       icon: currentStep > 0 ? <CheckIcon size={16} /> : "1",
