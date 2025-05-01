@@ -89,6 +89,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
         {
           ...allFormData,
           new_agent: selectedagent,
+          access_key: "testmycall",
           calling_number: "+18582520325",
         }
       );

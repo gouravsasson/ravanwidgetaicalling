@@ -8,6 +8,7 @@ interface FormErrors {
   fullName?: string;
   email?: string;
   phone?: string;
+  
 }
 
 const Step1Form: React.FC<StepProps> = ({
@@ -45,7 +46,6 @@ const Step1Form: React.FC<StepProps> = ({
     if (validateForm()) {
       const data = {
         email: userData.email,
-        access_key: "testmycall",
         receiver_number: userData.phone,
         name: userData.fullName,
       };
