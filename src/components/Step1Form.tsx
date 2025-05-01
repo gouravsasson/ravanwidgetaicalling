@@ -8,7 +8,6 @@ interface FormErrors {
   fullName?: string;
   email?: string;
   phone?: string;
-  
 }
 
 const Step1Form: React.FC<StepProps> = ({
