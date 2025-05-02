@@ -3,7 +3,6 @@ import { StepProps } from "../types";
 import Button from "./Button";
 import { ArrowRight, Phone } from "lucide-react";
 
-
 // Define conversation structure
 interface Message {
   speaker: string;
@@ -120,9 +119,9 @@ const Step3CallDemo: React.FC<StepProps> = ({
 
       <div className="bg-white rounded-2xl p-6 shadow-md mb-6">
         <p className="text-lg text-gray-800 leading-relaxed">
-          Our AI is demonstrating how it would call your leads within minutes of
-          them visiting your website. This technology converts 21x more leads by
-          engaging them during the critical response window.
+          “Get ready! You’re about to receive a call from our AI Agent.” This is
+          a live demo to show you exactly how it engages your leads in real
+          time.
         </p>
       </div>
 
