@@ -103,8 +103,12 @@ const Step2CategorySelection: React.FC<StepProps> = ({
           calling_number: "+18582520325",
         }
       );
-      console.log("Form submitted:", allFormData);
       // alert("Request sent! We will contact you shortly.");
+      localStorage.setItem(
+        "quick_camp_result_id",
+        response.data.data.quickcamp_id
+      );
+      console.log(response.data.data.quickcamp_id);
     } catch (error) {
       // alert("An error occurred. Please try again later.");
     }

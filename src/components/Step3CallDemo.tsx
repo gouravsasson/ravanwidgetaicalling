@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { StepProps } from "../types";
 import Button from "./Button";
 import { ArrowRight, Phone } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { useCallResultStore } from "../utils/useCallResultStore";
 
 // Define conversation structure
 interface Message {
@@ -16,6 +20,7 @@ const Step3CallDemo: React.FC<StepProps> = ({
 }) => {
   const [transcript, setTranscript] = useState<Message[]>([]);
   const transcriptRef = useRef<HTMLDivElement>(null);
+  const [quickid, setQuickid] = useState(null);
 
   // Start call simulation when component mounts
   // useEffect(() => {
@@ -89,6 +94,43 @@ const Step3CallDemo: React.FC<StepProps> = ({
     "Manufacturing",
     "Retail",
   ];
+  const [buttonText, setButtonText] = useState("Complete Demo");
+  const [isLoading, setIsLoading] = useState(false);
+  const quick_camp_result_id = localStorage.getItem("quick_camp_result_id");
+  const { setCallResult } = useCallResultStore();
+  useEffect(() => {
+    setQuickid(quick_camp_result_id);
+  }, [quick_camp_result_id]);
+
+  const { data: callDemoData } = useQuery({
+    queryKey: ["call-demo", quick_camp_result_id],
+    queryFn: () =>
+      axios.post("https://app.closerx.ai/api/quick-campaign-results/", {
+        quick_camp_result_id,
+        "Company-Name": "voizerfreeaccount",
+      }),
+    enabled: !!quick_camp_result_id,
+    refetchInterval: (data) => {
+      const status = data?.state?.data?.data?.data?.status;
+      return status === "user_hangup" || status === "error" ? false : 1000;
+    },
+  });
+
+  useEffect(() => {
+    const status = callDemoData?.data?.data?.status;
+
+    const isLoadingStatus = ["initiated", "queued"];
+    const isCompletedStatus = ["user_hangup", "error"];
+
+    if (isCompletedStatus.includes(status)) {
+      setButtonText("Complete Demo");
+      setIsLoading(false);
+      setCallResult(callDemoData?.data);
+    } else if (isLoadingStatus.includes(status)) {
+      setButtonText("Call in Progress");
+      setIsLoading(true);
+    }
+  }, [callDemoData?.data?.data?.status]);
 
   return (
     <div className="max-w-xl mx-auto">
@@ -145,10 +187,19 @@ const Step3CallDemo: React.FC<StepProps> = ({
 
       <Button
         onClick={onNext}
-        icon={<ArrowRight size={18} />}
-        className="w-full mx-auto"
+        icon={
+          isLoading ? (
+            <Loader2 size={18} className="animate-spin" />
+          ) : (
+            <ArrowRight size={18} />
+          )
+        }
+        className={`w-full mx-auto ${
+          isLoading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        disabled={isLoading}
       >
-        Complete Demo
+        {buttonText}
       </Button>
     </div>
   );

@@ -67,21 +67,21 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
         <Step3CallDemo
           userData={userData}
           setUserData={setUserData}
-          onNext={resetDemo}
+          onNext={goToNextStep}
         />
       ),
       icon: currentStep > 2 ? <CheckIcon size={16} /> : "3",
     },
-    // {
-    //   component: (
-    //     <Step4Success
-    //       userData={userData}
-    //       setUserData={setUserData}
-    //       onNext={resetDemo}
-    //     />
-    //   ),
-    //   icon: currentStep > 3 ? <CheckIcon size={16} /> : "4",
-    // },
+    {
+      component: (
+        <Step4Success
+          userData={userData}
+          setUserData={setUserData}
+          onNext={resetDemo}
+        />
+      ),
+      icon: currentStep > 3 ? <CheckIcon size={16} /> : "4",
+    },
   ];
 
   return (
