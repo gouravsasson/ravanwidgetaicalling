@@ -112,16 +112,9 @@ const Step3CallDemo: React.FC<StepProps> = ({
     enabled: !!quick_camp_result_id,
     refetchInterval: (data) => {
       const status = data?.state?.data?.data?.data?.status;
-      const isCompletedStatus = [
-        "user_hangup",
-        "error",
-        "inactivity",
-        "agent_hangup",
-        "Disconnection",
-        "voicemail_reached",
-      ];
+      const isLoadingStatus = ["initiated", "queued"];
 
-      return isCompletedStatus.includes(status) ? false : 1000;
+      return !isLoadingStatus.includes(status) ? false : 1000;
     },
   });
 
@@ -129,22 +122,22 @@ const Step3CallDemo: React.FC<StepProps> = ({
     const status = callDemoData?.data?.data?.status;
 
     const isLoadingStatus = ["initiated", "queued"];
-    const isCompletedStatus = [
-      "user_hangup",
-      "error",
-      "inactivity",
-      "agent_hangup",
-      "Disconnection",
-      "voicemail_reached",
-    ];
+    // const isCompletedStatus = [
+    //   "user_hangup",
+    //   "error",
+    //   "inactivity",
+    //   "agent_hangup",
+    //   "Disconnection",
+    //   "voicemail_reached",
+    // ];
 
-    if (isCompletedStatus.includes(status)) {
+    if (isLoadingStatus.includes(status)) {
+      setButtonText("Call in Progress");
+      setIsLoading(true);
+    } else {
       setButtonText("Complete Demo");
       setIsLoading(false);
       setCallResult(callDemoData?.data);
-    } else if (isLoadingStatus.includes(status)) {
-      setButtonText("Call in Progress");
-      setIsLoading(true);
     }
   }, [callDemoData?.data?.data?.status]);
 
