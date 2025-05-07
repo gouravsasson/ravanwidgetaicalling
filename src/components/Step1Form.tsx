@@ -129,8 +129,8 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
         <div className="relative">
           <PhoneInput
             containerClass="w-full h-[58px]"
-            inputClass=" !h-[58px] !w-full !rounded-xl !pl-[100px]"
-            dropdownClass="bottom-10 z-50"
+            inputClass=" !h-[58px] !w-full !rounded-xl !pl-[100px] "
+            dropdownClass="bottom-10 z-50 !text-black"
             // buttonClass=" !w-[58px] "
             dropdownStyle={{ zIndex: 1000 }}
             inputProps={{
