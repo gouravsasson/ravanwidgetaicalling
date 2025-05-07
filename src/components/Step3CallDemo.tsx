@@ -120,7 +120,14 @@ const Step3CallDemo: React.FC<StepProps> = ({
     const status = callDemoData?.data?.data?.status;
 
     const isLoadingStatus = ["initiated", "queued"];
-    const isCompletedStatus = ["user_hangup", "error"];
+    const isCompletedStatus = [
+      "user_hangup",
+      "error",
+      "inactivity",
+      "agent_hangup",
+      "Disconnection",
+      "voicemail_reached",
+    ];
 
     if (isCompletedStatus.includes(status)) {
       setButtonText("Complete Demo");
