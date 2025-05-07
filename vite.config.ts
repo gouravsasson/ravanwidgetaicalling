@@ -12,10 +12,10 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/widget.tsx'), 
-      name: 'ReactWidget',
-      fileName: 'react-widget-uv',
-      formats: ['iife'], 
+      entry: path.resolve(__dirname, "src/widget.tsx"),
+      name: "ReactWidget",
+      fileName: "react-widget-ai",
+      formats: ["iife"],
     },
     rollupOptions: {
       // Remove external dependencies to bundle them
