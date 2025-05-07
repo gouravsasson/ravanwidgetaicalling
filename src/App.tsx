@@ -60,7 +60,7 @@ function App() {
       )}
 
       {showRavanExperience && (
-        <div className="absolute inset-0 flex justify-center items-center">
+        <div className="w-full h-full flex justify-center items-center">
           <RavanExperience
             userData={userData}
             setUserData={setUserData}
