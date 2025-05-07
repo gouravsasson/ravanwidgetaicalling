@@ -91,6 +91,7 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
       <DecorativeCircle className="w-60 h-60 -bottom-10 -left-10 bg-green-500/10 blur-3xl" />
 
       {/* Back button (not shown on first or last step) */}
+      
       {currentStep > 0 && currentStep < 3 && (
         <button
           onClick={goToPreviousStep}
