@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserData } from "./types";
 import RavanExperience from "./components/RavanExperience";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import axios from "axios";
 function App() {
   const [showRavanExperience, setShowRavanExperience] = useState(false);
   const [userData, setUserData] = useState<UserData>({
@@ -11,6 +11,19 @@ function App() {
     phone: "",
     selectedCategory: 0,
   });
+  useEffect(() => {
+    const localCountryCode = localStorage.getItem("countryCode");
+    if (!localCountryCode) {
+      const fetchIp = async () => {
+        const res = await axios.get("https://ipapi.co/json/");
+        localStorage.setItem("countryCode", res.data.country_calling_code);
+        localStorage.setItem("countryName", res.data.country_name);
+        localStorage.setItem("continentcode", res.data.country);
+        localStorage.setItem("city", res.data.city);
+      };
+      fetchIp();
+    }
+  }, []);
   const queryClient = new QueryClient();
 
   const closeRavanExperience = () => {

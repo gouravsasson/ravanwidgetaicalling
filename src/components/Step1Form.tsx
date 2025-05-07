@@ -17,6 +17,7 @@ interface FormErrors {
 const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
   const [errors, setErrors] = useState<FormErrors>({});
   const transcripts = useTranscriptStore((state) => state.transcripts);
+  const continentcode = localStorage.getItem("continentcode");
 
   const validateForm = () => {
     const newErrors: FormErrors = {};
@@ -137,7 +138,7 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
               name: "phone",
               required: true,
             }}
-            country={"us"}
+            country={`${continentcode?.toLowerCase()}`}
             value={userData.phone}
             onChange={(phone) => {
               setUserData({ ...userData, phone });
