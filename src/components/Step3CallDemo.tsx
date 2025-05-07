@@ -112,7 +112,16 @@ const Step3CallDemo: React.FC<StepProps> = ({
     enabled: !!quick_camp_result_id,
     refetchInterval: (data) => {
       const status = data?.state?.data?.data?.data?.status;
-      return status === "user_hangup" || status === "error" ? false : 1000;
+      const isCompletedStatus = [
+        "user_hangup",
+        "error",
+        "inactivity",
+        "agent_hangup",
+        "Disconnection",
+        "voicemail_reached",
+      ];
+
+      return isCompletedStatus.includes(status) ? false : 1000;
     },
   });
 
