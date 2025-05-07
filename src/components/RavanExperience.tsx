@@ -94,36 +94,38 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
   return (
     <div className="w-full max-w-4xl relative bg-gradient-to-tr from-white to-gray-50 rounded-3xl shadow-xl overflow-hidden border border-gray-100">
       {/* Decorative elements */}
-      <DecorativeCircle className="w-72 h-72 -top-36 -right-20 bg-primary/20 blur-3xl" />
-      <DecorativeCircle className="w-60 h-60 -bottom-10 -left-10 bg-green-500/10 blur-3xl" />
+      {/* <DecorativeCircle className="w-72 h-72 -top-36 -right-20 bg-primary/20 blur-3xl" />
+      <DecorativeCircle className="w-60 h-60 -bottom-10 -left-10 bg-green-500/10 blur-3xl" /> */}
 
       {/* Close button */}
-      <button
-        onClick={handleStop}
-        className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-gray-100 transition-colors"
-        aria-label="Close"
-      >
-        <X size={20} className="text-gray-600" />
-      </button>
-
-      {/* Back button - only shown on steps 1-2 */}
-      {currentStep > 0 && currentStep < 3 && (
+      <div>
         <button
-          onClick={goToPreviousStep}
-          className="absolute top-4 left-4 z-10 p-4 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 shadow-sm transition-all"
+          onClick={handleStop}
+          className="absolute top-4 right-4 z-10 p-4 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 shadow-sm transition-all"
           aria-label="Go back"
         >
-          <ChevronLeft
-            onClick={goToPreviousStep}
-            size={30}
-            className="text-gray-600"
-          />
+          <X onClick={handleStop} size={30} className="text-red-500" />
         </button>
-      )}
 
-      {/* Progress indicator */}
-      <div className="relative z-10 pt-8">
-        <ProgressBar currentStep={currentStep} totalSteps={steps.length} />
+        {/* Back button - only shown on steps 1-2 */}
+        {currentStep > 0 && currentStep < 3 && (
+          <button
+            onClick={goToPreviousStep}
+            className="absolute top-4 left-4 z-10 p-4 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 shadow-sm transition-all"
+            aria-label="Go back"
+          >
+            <ChevronLeft
+              onClick={goToPreviousStep}
+              size={30}
+              className="text-gray-600"
+            />
+          </button>
+        )}
+
+        {/* Progress indicator */}
+        <div className="relative z-10 pt-8">
+          <ProgressBar currentStep={currentStep} totalSteps={steps.length} />
+        </div>
       </div>
 
       {/* Current step content */}
