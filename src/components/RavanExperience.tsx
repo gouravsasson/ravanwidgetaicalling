@@ -110,10 +110,14 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
       {currentStep > 0 && currentStep < 3 && (
         <button
           onClick={goToPreviousStep}
-          className="absolute top-4 left-4 z-10 p-2 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 shadow-sm transition-all"
+          className="absolute top-4 left-4 z-10 p-4 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 shadow-sm transition-all"
           aria-label="Go back"
         >
-          <ChevronLeft size={20} className="text-gray-600" />
+          <ChevronLeft
+            onClick={goToPreviousStep}
+            size={30}
+            className="text-gray-600"
+          />
         </button>
       )}
 
