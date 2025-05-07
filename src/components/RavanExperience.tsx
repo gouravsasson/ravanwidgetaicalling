@@ -5,23 +5,31 @@ import Step1Form from "./Step1Form";
 import Step2CategorySelection from "./Step2CategorySelection";
 import Step3CallDemo from "./Step3CallDemo";
 import Step4Success from "./Step4Success";
-import { CheckIcon, Phone, ChevronLeft } from "lucide-react";
+import { CheckIcon, ChevronLeft, X } from "lucide-react";
+import { useRetellStore } from "../utils/useRetellStore";
 
-// Decorative circle component for visual interest
-const DecorativeCircle = ({ className }: { className: string }) => (
+const DecorativeCircle = ({ className }) => (
   <div className={`absolute rounded-full opacity-30 ${className}`}></div>
 );
 
 interface RavanExperienceProps {
   userData: UserData;
   setUserData: React.Dispatch<React.SetStateAction<UserData>>;
+  onClose: () => void;
 }
 
 const RavanExperience: React.FC<RavanExperienceProps> = ({
   userData,
   setUserData,
+  onClose,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
+  const handleStop = () => {
+    const state = useRetellStore.getState() as { stopAgent: () => void };
+    state.stopAgent();
+    onClose();
+  };
+
   const goToNextStep = () => {
     setCurrentStep((prev) => Math.min(prev + 1, 3));
   };
@@ -40,7 +48,6 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
     setCurrentStep(0);
   };
 
-  // Define the steps and their respective components
   const steps = [
     {
       component: (
@@ -90,8 +97,16 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
       <DecorativeCircle className="w-72 h-72 -top-36 -right-20 bg-primary/20 blur-3xl" />
       <DecorativeCircle className="w-60 h-60 -bottom-10 -left-10 bg-green-500/10 blur-3xl" />
 
-      {/* Back button (not shown on first or last step) */}
-      
+      {/* Close button */}
+      <button
+        onClick={handleStop}
+        className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-gray-100 transition-colors"
+        aria-label="Close"
+      >
+        <X size={20} className="text-gray-600" />
+      </button>
+
+      {/* Back button - only shown on steps 1-2 */}
       {currentStep > 0 && currentStep < 3 && (
         <button
           onClick={goToPreviousStep}
@@ -107,7 +122,7 @@ const RavanExperience: React.FC<RavanExperienceProps> = ({
         <ProgressBar currentStep={currentStep} totalSteps={steps.length} />
       </div>
 
-      {/* Step content */}
+      {/* Current step content */}
       <div className="p-6 pb-10">{steps[currentStep].component}</div>
     </div>
   );
