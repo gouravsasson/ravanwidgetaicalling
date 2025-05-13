@@ -154,7 +154,7 @@ const Step1Form: React.FC<StepProps> = ({ userData, setUserData, onNext }) => {
         <Button
           type="submit"
           icon={<ArrowRight size={18} />}
-          className="w-full mt-6"
+          className="w-full mt-6 bg-primary text-white"
         >
           Continue to Select Business Type
         </Button>
