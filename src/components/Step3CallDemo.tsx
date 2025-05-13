@@ -203,7 +203,7 @@ const Step3CallDemo: React.FC<StepProps> = ({
             <ArrowRight size={18} />
           )
         }
-        className={`w-full mx-auto ${
+        className={`w-full mx-auto bg-primary text-white ${
           isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}
         disabled={isLoading}

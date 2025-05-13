@@ -206,7 +206,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
       <Button
         onClick={handleNext}
         icon={<ArrowRight size={18} />}
-        className="w-full mx-auto mt-4"
+        className="w-full mx-auto mt-4 bg-primary text-white"
       >
         Continue to AI Call Demo
       </Button>
