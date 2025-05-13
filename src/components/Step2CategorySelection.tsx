@@ -161,7 +161,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
                     bg-white rounded-xl cursor-pointer transition-all duration-300 select-none
                     ${
                       isSelected
-                        ? "bg-gradient-to-r from-primary to-primary-dark z-10 shadow-lg shadow-primary/25 scale-105"
+                        ? "bg-gradient-to-r from-primary to-primary-dark text-black z-10 shadow-lg shadow-primary/25 scale-105"
                         : "border border-gray-100 text-gray-800 shadow-md"
                     }`}
                   style={{
