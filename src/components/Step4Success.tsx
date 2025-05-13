@@ -63,7 +63,7 @@ const Step4Success: React.FC<StepProps> = ({
       <Button
         onClick={onNext}
         icon={<RotateCcw size={18} />}
-        className="mx-auto"
+        className="mx-auto bg-primary text-white"
       >
         Try Another Business Type
       </Button>
