@@ -96,7 +96,7 @@ const Step2CategorySelection: React.FC<StepProps> = ({
         `https://app.closerx.ai/api/testcall/voizerfreeaccount/`,
         {
           email: userData.email,
-          receiver_number: userData.phone,
+          receiver_number: "+" + userData.phone,
           name: userData.fullName,
           new_agent: selectedagent,
           access_key: "testmycall",
